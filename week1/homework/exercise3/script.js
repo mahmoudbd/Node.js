@@ -16,7 +16,7 @@ const server = http.createServer((req, res) => {
 	  </html>
              `);
 	} else if (req.url === '/script.js') {
-		res.writeHead(200, { 'Content-Type': 'text/javascript' });
+		res.writeHead(200, { 'Content-Type': 'application/javascript' });
 		res.write(`document.getElementById('content')
 		.appendChild(document.createTextNode('Welcome to Server-land!'));`);
 	} else if (req.url === '/style.css') {
