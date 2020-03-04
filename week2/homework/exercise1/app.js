@@ -35,8 +35,12 @@ app.delete('/blogs/:title', (req, res) => {
 //GET
 app.get('/blogs/:title', (req, res) => {
 	const title = req.params.title;
-	res.set('Content-Type', 'text/plain');
-	res.sendFile(title);
+	res.sendFile(title, {
+		root: __dirname,
+		headers: {
+			'Content-Type': 'text/plain'
+		}
+	});
 });
 
 app.listen(port, () => {
