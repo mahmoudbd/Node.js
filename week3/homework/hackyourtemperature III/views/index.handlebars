@@ -1,0 +1,28 @@
+
+<div class="main">
+<p>{{Error}}</p>
+ <p>{{para}}</p>
+ <p>{{greeting}}</p>
+<form action="/weather" method="POST" >
+<input type="text" name="cityName" placeholder="Enter city name" class="input">
+<input type="submit" value="Send" class="button">
+</form>
+<div class="info">
+<table>
+    <tr>
+        <th>{{sys}} {{cityName}}</th>  
+    </tr>
+     <tr>
+        <th>{{temp}}</th>
+    </tr>
+    <tr>
+        <th>{{maxTemp}}</th>   
+    </tr>
+    <tr>
+   <th>{{minTemp}}</th>
+    </tr>
+</table>
+</div>
+</div>
+
+
