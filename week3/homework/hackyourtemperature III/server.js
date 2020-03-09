@@ -19,30 +19,31 @@ app.get('/', (req, res) => {
 
 app.post('/weather', (req, res) => {
 	const cityName = req.body.cityName;
-	const url = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${APIKEY}&units=metric`;
+	if (cityName) {
+		const url = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${APIKEY}&units=metric`;
 
-	axios
-		.get(url)
-		.then((response) => {
-			return response.data;
-		})
-		.then((data) => {
-			console.log(data);
-			const sys = ` ${data.sys.country}`;
-			const cityName = ` ${data.name}`;
-			const temp = `Temperature ${data.main.temp}°C`;
-			const maxTemp = ` Max temperature ${data.main.temp_max}°C`;
-			const minTemp = `Min temperature ${data.main.temp_min}°C`;
-			const para = 'Hack your temperature';
-			const weather = { sys, cityName, temp, maxTemp, minTemp, para };
+		axios
+			.get(url)
+			.then((response) => {
+				return response.data;
+			})
+			.then((data) => {
+				const sys = ` ${data.sys.country}`;
+				const cityName = ` ${data.name}`;
+				const temp = `Temperature ${data.main.temp}°C`;
+				const maxTemp = ` Max temperature ${data.main.temp_max}°C`;
+				const minTemp = `Min temperature ${data.main.temp_min}°C`;
+				const para = 'Hack your temperature';
+				const weather = { sys, cityName, temp, maxTemp, minTemp, para };
 
-			res.render('index', weather);
-		})
-		.catch((err) => {
-			res.render('index', {
-				Error: `Error ${err.response.data.cod}  ${err.response.data.message}`
+				res.render('index', weather);
+			})
+			.catch(() => {
+				res.render('index', {
+					Error: `Error City Not Found'`
+				});
 			});
-		});
+	} else res.status(400).send(`<h1> 400 - Bad Request ! <h1> `);
 });
 
 app.listen(port, () => {
