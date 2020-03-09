@@ -11,7 +11,7 @@ function reservation(url, body) {
 		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify(body)
 	})
-		.then((res) => res.text)
+		.then((res) => res.text())
 		.then((text) => {
 			console.log(text);
 		})
